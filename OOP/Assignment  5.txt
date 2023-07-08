@@ -1,0 +1,97 @@
+Name: Shrikant Sanjeev Pawar
+Roll No: 52
+SE IT
+Assignment 5: Vehicle Management Using Interface
+_________________________________________________________________________________________________________________________
+Code :
+
+package shrikant;
+interface Vehicle
+{
+  void gear_change();
+  void speed_up();
+  void apply_breaks();
+}
+class Bicycle implements Vehicle
+{
+  public void gear_change()
+  {
+  System.out.println("Gear For Bicycle is Activated");
+  }
+  public void speed_up()
+  {
+  System.out.println("Speed up for Bicycle is Activated");
+  }
+  public void apply_breaks()
+  {
+  System.out.println("Apply Breaks For Bicycle is Activated");
+  }
+}
+class Car implements Vehicle
+{
+  public void gear_change()
+  {
+  System.out.println("Gear For Car is Activated");
+  }
+  public void speed_up()
+  {
+  System.out.println("Speed up for Car is Activated");
+  }
+  public void apply_breaks()
+  {
+  System.out.println("Apply Breaks For Car is Activated");
+  }
+}
+class Bike implements Vehicle
+{
+  public void gear_change()
+  {
+  System.out.println("Gear For Bike is Activated");
+  }
+  public void speed_up()
+  {
+  System.out.println("Speed up for Bike is Activated");
+  }
+  public void apply_breaks()
+  {
+  System.out.println("Apply Breaks For Bike is Activated");
+  }
+}
+public class Assignment_5 
+{
+    public static void main(String [] args)
+    {
+        Bicycle b=new Bicycle();
+        Car c=new Car();
+        Bike bk=new Bike();
+        
+        b.gear_change();
+        b.speed_up();
+        b.apply_breaks();
+        
+        c.gear_change();
+        c.speed_up();
+        c.apply_breaks();
+        
+        bk.gear_change();
+        bk.speed_up();
+        bk.apply_breaks();
+          
+    }
+}
+_________________________________________________________________________________________________________________________
+Output:
+
+
+run:
+Gear For Bicycle is Activated
+Speed up for Bicycle is Activated
+Apply Breaks For Bicycle is Activated
+Gear For Car is Activated
+Speed up for Car is Activated
+Apply Breaks For Car is Activated
+Gear For Bike is Activated
+Speed up for Bike is Activated
+Apply Breaks For Bike is Activated
+BUILD SUCCESSFUL (total time: 0 seconds)
+_________________________________________________________________________________________________________________________

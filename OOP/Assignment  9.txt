@@ -1,0 +1,804 @@
+Name: Shrikant Sanjeev Pawar
+Roll No: 52
+SE IT
+Mini Project : ATM menu Driven Program
+_________________________________________________________________________________________________________________________
+Code :
+package bank_account;
+import java.util.*;
+class Accopen
+{
+	static Scanner Sc = new Scanner(System.in);
+	int a;
+	static String name;
+	static int ran;
+	static int flag = 0, flag1 = 0, Accbal,flag3=0;
+	void Generate_new_Acc_no() 
+	{
+		if (flag1 == 0) 
+		{
+			int min = 100000;
+			int max = 999999;
+			System.out.println("Enter Your Name");
+			name=Sc.nextLine();
+			a = (int) (Math.random() * (max - min + 1) + min);
+			ran = a;
+			flag =  1;
+			flag1 = 1;
+			System.out.println("Hello "+name +" ,You have created Your account Sucessfully");
+			System.out.println("And Your Account Number is "+ran+" ,Please Remember It .");
+		}
+		else
+		{
+			System.out.println("You have Already created the account");
+		}
+	}
+
+	void print_new_Acc_no() 
+	{
+		if (flag == 1) 
+		{
+			System.out.println("Hello "+name+" , Your Account Number is: "+ran);
+		} 
+		else 
+		{
+			System.out.println("Oops!! , You have not creted Your account .We are unable to show.");
+		}
+	}
+
+	void firstdeposit() 
+	{
+		if(flag3==0)
+		{
+		if (flag == 1) 
+		{
+			System.out.println("Congrats this is your First bank transaction of your Account ");
+			System.out.println("As per bank rules minimum 1000 Rs to be deposited as a first transaction");
+			System.out.println("Enter the amount Do You want To deposit");
+			int temp = Sc.nextInt();
+			if (temp >= 1000) 
+			{
+				Accbal = temp;
+				flag3=1;
+				System.out.println("Congrats !!\nTransaction Sucessfull");
+			} else 
+			{
+				System.out.println("Sorry Amount You are depositing Must be 1000 or greater 1000");
+			}
+		}
+		else 
+		{
+			System.out.println("Oops!! , You have not creted Your account yet.");
+		}
+	}
+		else
+		{
+			System.out.println("This Not first Time You are Depositing Money In your Account. Please Go to Normal Deposit Section");
+		}
+	}
+	void deposit()
+	{
+		if(flag==1 && flag3==1)
+		{
+		System.out.println("Enter The Amount Do you Want to Deposit");
+		int temp=Sc.nextInt();
+		if (temp>0)
+		{
+			Accbal=Accbal+temp;
+			flag3=1;
+			System.out.println("Congrats !!\nTransaction Sucessfull");
+		}
+		else
+		{
+			System.out.println("Enter Valid Amount");
+		}
+		}
+		else if(flag!=1)
+		{
+			System.out.println("Oops!! , You have not creted Your account yet.");
+		}
+		else if(flag3!=1)
+		{
+			System.out.println("Your First Deposit Transession is Pending , Do that First");
+		}
+	}
+	void choice_3()
+	{
+		if(flag==0)
+		{
+			System.out.println("Oops!! , You have not creted Your account yet.We are unable to show.");
+		}
+		else if (flag3==1)
+		{
+		System.out.println("Your Account Balance Is : "+Accbal);
+		}
+		else
+		{
+			System.out.println("You have not done your First Bank Transaction yet. Do it ASAP");
+		}
+	}
+	void choice_4()
+	{
+		if(flag==0)
+		{
+			System.out.println("Oops!! , You have not creted Your account yet.We are unable to show.");
+		}
+	
+		else
+		{
+			System.out.println("Name of Account Holder is: "+name);
+		}
+	}
+	
+	void choice()
+	{
+		System.out.println("Enter Choice\n");
+		System.out.print("1) for Opening New Account");
+		System.out.println("\t\t\t2) for Printing Account Number");
+		System.out.print("3) for Print Account Balance");
+		System.out.println("\t\t\t4) for Print Account Holder name");
+		System.out.print("5) To access ATM services");
+		System.out.println("\t\t\t6) for Deposit First Time");
+		System.out.print("7) for Deposit");
+		System.out.println("\t\t\t\t\t8) for Exit");
+	}
+	
+}
+class ATM extends Accopen 
+{
+	static int c98=0;
+	int choice=0;
+	static int prepass=0;
+	 void cbook() 
+	{
+		System.out.println("Enter 1 to confirm your order. As per Bank Rules We are Going to Charge 100 /- as a processing fee");
+		System.out.println("Enter 2 to return");
+		int cb = Sc.nextInt();
+		if (cb == 1 && Accbal>=100) 
+		{
+			Accbal=Accbal-100;
+			System.out.println("Your Cheque book will be delivered to you Shortly.\n Thank You!\n Visit again ");
+		}
+		else if(Accbal<100)
+		{
+			System.out.println("Insufficient Funds!!");
+		}
+		else if (cb != 2) 
+		{
+			System.out.println("Please Provide Valid Input");
+		}
+	}
+	 
+	 static void choice2()
+	 {
+	 	System.out.println("Welcome to Fast cash service");
+	 	System.out.println("Select the Option For Cash Service");
+	 	System.out.println("1) 100 /- Rs   \t\t\t2) 200 /- Rs");
+	 	System.out.println("3) 500 /- Rs   \t\t\t4) 1000 /- Rs");
+	 	System.out.println("5) 2000 /- Rs  \t\t\t6) 5000 /- Rs");
+	 	System.out.println("7) 10000 /- Rs  \t\t8) Other Amount");
+	 }
+	 
+	 
+	 void withdrawl()
+	 {
+		 System.out.println("Enter The amount for withdrawal");
+			int temp1 = Sc.nextInt();
+			if(temp1>=0)
+			{
+			if (temp1 <= Accbal) 
+			{
+				Accbal = Accbal- temp1;
+				System.out.println("transaction is successful");
+			} else 
+			{
+				System.out.println("Insufficient Funds!!");
+			}
+			}
+			else
+			{
+				System.out.println("Please Enter Valid Amount");
+			}
+	 }
+	 void fastcash()
+	 {
+		 choice2();
+		 int f1 = Sc.nextInt();
+			switch (f1) 
+			{
+			case 1:
+				if (100 <= Accbal) 
+				{
+					Accbal = Accbal - 100;
+					System.out.println("transaction is successful");
+				} 
+				else 
+				{
+					System.out.println("Insufficient Funds!!");
+				}
+				break;
+			case 2:
+				if (200 <= Accbal) 
+				{
+					Accbal = Accbal - 200;
+					System.out.println("transaction is successful");
+				} 
+				else 
+				{
+					System.out.println("Insufficient Funds!!");
+				}
+				break;
+			case 3:
+				if (500 <= Accbal) 
+				{
+					Accbal = Accbal - 500;
+					System.out.println("transaction is successful");
+				}
+				else 
+				{
+					System.out.println("Insufficient Funds!!");
+				}
+				break;
+			case 4:
+				if (1000 <=Accbal) 
+				{
+					Accbal= Accbal - 1000;
+					System.out.println("transaction is successful");
+				} 
+				else 
+				{
+					System.out.println("Insufficient Funds!!");
+				}
+				break;
+			case 5:
+				if (2000 <= Accbal) 
+				{
+					Accbal = Accbal - 2000;
+					System.out.println("transaction is successful");
+				} 
+				else 
+				{
+					System.out.println("Insufficient Funds!!");
+				}
+				break;
+			case 6:
+				if (5000 <= Accbal) 
+				{
+					Accbal = Accbal - 5000;
+					System.out.println("transaction is successful");
+				}
+				else 
+				{
+					System.out.println("Insufficient Funds!!");
+				}
+				break;
+			case 7:
+				if (10000 <= Accbal) 
+				{
+					Accbal =Accbal- 10000;
+					System.out.println("transaction is successful");
+				} 
+				else 
+				{
+					System.out.println("Insufficient Funds!!");
+				}
+				break;
+			case 8:
+				System.out.println("Enter The amount for withdrawal");
+				int temp1 = Sc.nextInt();
+				if (temp1>=0)
+				{
+				if (temp1 <= Accbal) 
+				{
+					Accbal = Accbal - temp1;
+					System.out.println("transaction is successful");
+				}
+				else 
+				{
+					System.out.println("Insufficient Funds!!");
+				}
+				}
+				else
+				{
+					System.out.println("Please Enter Valid Amount");
+				}
+				break;
+			default:
+				System.out.println("Provide Valid input");
+				break;
+			}
+	 }
+	 
+	 void setpass()
+	 {
+		 int c1=0;
+		 do {
+			 System.out.println("To Use ATM Services You have to First Set Password For Your ATM Card");
+			 System.out.println("Enter the Password which Do you want to set");
+			 int a=Sc.nextInt();
+			 System.out.println("Enter the Password again for Confirmation");
+			 int b=Sc.nextInt();
+			 if (a==b)
+			 {
+			 prepass=a;
+			 System.out.println("Password Set Sucessfully");
+			 c98=1;
+			 }
+			 else
+			 {
+				 c1=198;
+				 System.out.println("Password are not matching");
+			 }
+		 }while(c1==198 && c98!=1);
+	 }
+	 
+	 
+	 void passchange() 
+		{
+		 if (c98==1)
+		 {
+			int count = 0;
+			int count1 = 0;
+			System.out.println("Welcome to Password Change Section");
+			do {
+				System.out.println("Enter old Password");
+				int oldpass = Sc.nextInt();
+				if (prepass == oldpass) 
+				{
+					count = 0;
+					do 
+					{
+						System.out.println("Enter new Password of  account ");
+						int pass11 = Sc.nextInt();
+						System.out.println("Enter again");
+						int pass1i = Sc.nextInt();
+						if (pass1i == pass11) 
+						{
+							prepass = pass1i;
+							count1 = 0;
+							System.out.println("Password Changed Sucessfully");
+						} 
+						else 
+						{
+							count1 = 1;
+							System.out.println("Password does not match . Enter Password again");
+						}
+					} while (count1 == 1);
+				} 
+				else 
+				{
+					System.out.println("Oops!!\nOld password / password Provided By Bank is not matching");
+					count = 1;
+				}
+			} while (count == 1);
+		 }
+		 else
+		 {
+			 System.out.println("Set the Password first For Your Account .");
+		 }
+		}
+		
+		
+		
+	
+	void ATM_Menu()
+	{
+		if (flag == 1 && flag3==1)
+		{
+		 if (c98==0)
+         {
+        	 setpass();
+        	 
+         }
+		System.out.println("Enter Account Number");
+		int c21=Sc.nextInt();
+		System.out.println("Enter Password");
+		int c20=Sc.nextInt();
+
+		if(c20==prepass && c21==ran)
+		{
+			do 
+			{
+			if (flag == 1 && flag3==1 && c98==1) 
+			{
+				if(flag3==1)
+				{
+				System.out.println("Enter Choice\n\n");
+				System.out.print("1) for Account Number");
+				System.out.println("\t\t\t\t2)  for Account balance");
+				System.out.print("3) for Amount Deposit");
+				System.out.println("\t\t\t\t4)  for Amount Withdrawal");
+				System.out.print("5) For fast cash Service");
+				System.out.println("\t\t\t6)  for Change Password");
+				System.out.print("7) for Print Password");
+				System.out.println("\t\t\t\t8)  To Request for Cheque Book");
+				System.out.print("9) for Print the Account Holder Name");
+				System.out.println("\t\t10) for to Exit");
+				 choice =Sc.nextInt();
+				switch (choice) 
+				{
+				case 1: 
+				{
+					System.out.println("Hello "+name+", Your Account Number is:"+ran);
+				}
+				break;
+				case 2:
+				{
+					choice_3();
+				}
+				break;
+				case 3:
+					deposit();
+					break;
+				case 4:
+					withdrawl();
+					break;
+				case 5:
+					fastcash();
+					break;
+				case 6:
+					passchange();
+					break;
+				case 7:
+					System.out.println("Password Of Your ATM Card is:"+prepass);
+					break;		
+				case 8:
+					cbook();
+					break;	
+				case 9:
+					choice_4();
+					break;	
+				case 10:
+					System.out.println("Enter 1 to Confirm");
+					int a=Sc.nextInt();
+					if(a==1)
+					{
+						choice=198;
+					}
+					break;	
+					default:
+						System.out.println("Enter Valid Amount");
+						break;
+				}
+				}
+				else
+				{
+					System.out.println("You have not done your First Bank transession yet.To access bank Services You need to Do that ASAP");
+					break;
+				}
+			} 
+			else 
+			{
+				System.out.println("Oops!! , You have not creted Your account .We are unable Continue Further.");
+				break;
+			}
+		
+			}while(choice!=198);
+		}
+		else
+		{
+			System.out.println("Please Provide Correct details");
+			ATM_Menu();
+		}
+	}
+		else if (flag != 1)
+		{
+			System.out.println("Oops!! , You have not creted Your account .We are unable Continue Further.");
+			
+		}
+		else if(flag3!=1)
+		{
+			System.out.println("You have not done your First Bank transession yet.To access bank Services You need to Do that ASAP");
+		}
+		
+	}
+	
+}
+public class Assignment_Mini_Project extends Accopen 
+{
+	static Accopen o = new Accopen();
+	static ATM A = new ATM();
+	static Scanner Sc = new Scanner(System.in);
+
+	public static void main(String[] args) 
+	{
+		int choice=0;
+		do 
+		{
+            o.choice();
+			choice = Sc.nextInt();
+			switch (choice) {
+			case 1:
+				o.Generate_new_Acc_no();
+				break;
+			case 2:
+				o.print_new_Acc_no();
+				break;
+			case 3:
+				o.choice_3();
+				break;
+			case 4:
+				o.choice_4();
+				break;
+			case 5:
+				A.ATM_Menu();
+				break;
+			case 6:
+				o.firstdeposit();
+				break;
+			case 7:
+				o.deposit();
+				break;
+			case 8:
+				System.out.println("Enter 1 to exit");
+				int temp=Sc.nextInt();
+				if (temp==1)
+				{
+				choice =198;
+				}
+				break;
+			default:
+				System.out.println("Enter Valid choice");
+				break;
+			}
+		} while (choice != 198);
+	}
+}
+
+
+
+
+____________________________________________________________________________________________________________________
+Output: 
+
+Enter Choice
+
+1) for Opening New Account			2) for Printing Account Number
+3) for Print Account Balance			4) for Print Account Holder name
+5) To access ATM services			6) for Deposit First Time
+7) for Deposit				8) for Exit
+1
+Enter Your Name
+Shrikant Sanjeev Pawar
+Hello Shrikant Sanjeev Pawar ,You have created Your account Sucessfully
+And Your Account Number is 419695 ,Please Remember It .
+Enter Choice
+
+1) for Opening New Account			2) for Printing Account Number
+3) for Print Account Balance			4) for Print Account Holder name
+5) To access ATM services			6) for Deposit First Time
+7) for Deposit				8) for Exit
+6
+Congrats this is your First bank transaction of your Account 
+As per bank rules minimum 1000 Rs to be deposited as a first transaction
+Enter the amount Do You want To deposit
+10000
+Congrats !!
+Transaction Sucessfull
+Enter Choice
+
+1) for Opening New Account			2) for Printing Account Number
+3) for Print Account Balance			4) for Print Account Holder name
+5) To access ATM services			6) for Deposit First Time
+7) for Deposit				8) for Exit
+2
+Hello Shrikant Sanjeev Pawar , Your Account Number is: 419695
+Enter Choice
+
+1) for Opening New Account			2) for Printing Account Number
+3) for Print Account Balance			4) for Print Account Holder name
+5) To access ATM services			6) for Deposit First Time
+7) for Deposit				8) for Exit
+3
+Your Account Balance Is : 10000
+Enter Choice
+
+1) for Opening New Account			2) for Printing Account Number
+3) for Print Account Balance			4) for Print Account Holder name
+5) To access ATM services			6) for Deposit First Time
+7) for Deposit				8) for Exit
+4
+Name of Account Holder is: Shrikant Sanjeev Pawar
+Enter Choice
+
+1) for Opening New Account			2) for Printing Account Number
+3) for Print Account Balance			4) for Print Account Holder name
+5) To access ATM services			6) for Deposit First Time
+7) for Deposit				8) for Exit
+7
+Enter The Amount Do you Want to Deposit
+2000
+Congrats !!
+Transaction Sucessfull
+Enter Choice
+
+1) for Opening New Account			2) for Printing Account Number
+3) for Print Account Balance			4) for Print Account Holder name
+5) To access ATM services			6) for Deposit First Time
+7) for Deposit				8) for Exit
+3
+Your Account Balance Is : 12000
+Enter Choice
+
+1) for Opening New Account			2) for Printing Account Number
+3) for Print Account Balance			4) for Print Account Holder name
+5) To access ATM services			6) for Deposit First Time
+7) for Deposit				8) for Exit
+5
+To Use ATM Services You have to First Set Password For Your ATM Card
+Enter the Password which Do you want to set
+1111
+Enter the Password again for Confirmation
+1111
+Password Set Sucessfully
+Enter Account Number
+419695
+Enter Password
+1111
+Enter Choice
+
+
+1) for Account Number			2)  for Account balance
+3) for Amount Deposit				4)  for Amount Withdrawal
+5) For fast cash Service			6)  for Change Password
+7) for Print Password				8)  To Request for Cheque Book
+9) for Print the Account Holder Name		10) for to Exit
+1
+Hello Shrikant Sanjeev Pawar, Your Account Number is:419695
+Enter Choice
+
+
+1) for Account Number			2)  for Account balance
+3) for Amount Deposit				4)  for Amount Withdrawal
+5) For fast cash Service			6)  for Change Password
+7) for Print Password				8)  To Request for Cheque Book
+9) for Print the Account Holder Name		10) for to Exit
+2
+Your Account Balance Is : 12000
+Enter Choice
+
+
+1) for Account Number			2)  for Account balance
+3) for Amount Deposit				4)  for Amount Withdrawal
+5) For fast cash Service			6)  for Change Password
+7) for Print Password				8)  To Request for Cheque Book
+9) for Print the Account Holder Name		10) for to Exit
+3
+Enter The Amount Do you Want to Deposit
+5000
+Congrats !!
+Transaction Sucessfull
+Enter Choice
+
+
+1) for Account Number			2)  for Account balance
+3) for Amount Deposit				4)  for Amount Withdrawal
+5) For fast cash Service			6)  for Change Password
+7) for Print Password				8)  To Request for Cheque Book
+9) for Print the Account Holder Name		10) for to Exit
+2
+Your Account Balance Is : 17000
+Enter Choice
+
+
+1) for Account Number			2)  for Account balance
+3) for Amount Deposit				4)  for Amount Withdrawal
+5) For fast cash Service			6)  for Change Password
+7) for Print Password				8)  To Request for Cheque Book
+9) for Print the Account Holder Name		10) for to Exit
+4
+Enter The amount for withdrawal
+9000
+transaction is successful
+Enter Choice
+
+
+1) for Account Number			2)  for Account balance
+3) for Amount Deposit				4)  for Amount Withdrawal
+5) For fast cash Service			6)  for Change Password
+7) for Print Password				8)  To Request for Cheque Book
+9) for Print the Account Holder Name		10) for to Exit
+5
+Welcome to Fast cash service
+Select the Option For Cash Service
+1) 100 /- Rs   			2) 200 /- Rs
+3) 500 /- Rs   			4) 1000 /- Rs
+5) 2000 /- Rs  			6) 5000 /- Rs
+7) 10000 /- Rs  		8) Other Amount
+6
+transaction is successful
+Enter Choice
+
+
+1) for Account Number			2)  for Account balance
+3) for Amount Deposit				4)  for Amount Withdrawal
+5) For fast cash Service			6)  for Change Password
+7) for Print Password				8)  To Request for Cheque Book
+9) for Print the Account Holder Name		10) for to Exit
+2
+Your Account Balance Is : 3000
+Enter Choice
+
+
+1) for Account Number			2)  for Account balance
+3) for Amount Deposit				4)  for Amount Withdrawal
+5) For fast cash Service			6)  for Change Password
+7) for Print Password				8)  To Request for Cheque Book
+9) for Print the Account Holder Name		10) for to Exit
+6
+Welcome to Password Change Section
+Enter old Password
+1111
+Enter new Password of  account 
+1212
+Enter again
+1212
+Password Changed Sucessfully
+Enter Choice
+
+
+1) for Account Number			2)  for Account balance
+3) for Amount Deposit				4)  for Amount Withdrawal
+5) For fast cash Service			6)  for Change Password
+7) for Print Password				8)  To Request for Cheque Book
+9) for Print the Account Holder Name		10) for to Exit
+7
+Password Of Your ATM Card is:1212
+Enter Choice
+
+
+1) for Account Number			2)  for Account balance
+3) for Amount Deposit				4)  for Amount Withdrawal
+5) For fast cash Service			6)  for Change Password
+7) for Print Password				8)  To Request for Cheque Book
+9) for Print the Account Holder Name		10) for to Exit
+8
+Enter 1 to confirm your order. As per Bank Rules We are Going to Charge 100 /- as a processing fee
+Enter 2 to return
+1
+Your Cheque book will be delivered to you Shortly.
+ Thank You!
+ Visit again 
+Enter Choice
+
+
+1) for Account Number			2)  for Account balance
+3) for Amount Deposit				4)  for Amount Withdrawal
+5) For fast cash Service			6)  for Change Password
+7) for Print Password				8)  To Request for Cheque Book
+9) for Print the Account Holder Name		10) for to Exit
+2
+Your Account Balance Is : 2900
+Enter Choice
+
+
+1) for Account Number			2)  for Account balance
+3) for Amount Deposit				4)  for Amount Withdrawal
+5) For fast cash Service			6)  for Change Password
+7) for Print Password				8)  To Request for Cheque Book
+9) for Print the Account Holder Name		10) for to Exit
+9
+Name of Account Holder is: Shrikant Sanjeev Pawar
+Enter Choice
+
+
+1) for Account Number			2)  for Account balance
+3) for Amount Deposit				4)  for Amount Withdrawal
+5) For fast cash Service			6)  for Change Password
+7) for Print Password				8)  To Request for Cheque Book
+9) for Print the Account Holder Name		10) for to Exit
+10
+Enter 1 to Confirm
+1
+Enter Choice
+
+1) for Opening New Account			2) for Printing Account Number
+3) for Print Account Balance			4) for Print Account Holder name
+5) To access ATM services			6) for Deposit First Time
+7) for Deposit				8) for Exit
+8
+Enter 1 to exit
+1
+BUILD SUCCESSFUL 
+
+_________________________________________________________________________________________________________________________

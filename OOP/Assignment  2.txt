@@ -1,0 +1,523 @@
+Name        : Shrikant Sanjeev Pawar
+Roll No     : 52
+SE IT
+Assignment 2: Book Shop
+________________________________________________________________________________________________________________
+Code :
+package shrikant;
+
+import java.util.Scanner;
+
+class publication 
+{
+	String Title;
+	double Price;
+	int Copies;
+	static int total_sale;
+	Scanner input = new Scanner(System.in);
+
+	void saleCopy() 
+	{
+		System.out.println("How many copies do you want");
+		int demand = input.nextInt();
+		if (Copies >= demand) 
+		{
+			double bill = demand * Price;
+			Copies = Copies - demand;
+			System.out.println("Final Bill amount: " + bill);
+			total_sale = total_sale + demand;
+		} else 
+		{
+			System.out.println("Sufficient Quantity not available");
+		}
+	}
+}
+
+class book extends publication 
+{
+	String author;
+	Scanner input = new Scanner(System.in);
+	static int total_order;
+
+	void orderCopies() 
+	{
+		System.out.println("Quantity to order");
+		int Order_quantity = input.nextInt();
+		Copies = Copies + Order_quantity;
+		total_order = total_order + Order_quantity;
+	}
+
+	void getbookdata() 
+	{
+		System.out.println("Author = ");
+		author = input.nextLine();
+		System.out.println("title = ");
+		Title = input.nextLine();
+		System.out.println("price = ");
+		Price = input.nextDouble();
+		System.out.println("copies = ");
+		Copies = input.nextInt();
+	}
+
+	void displaybookdata() 
+	{
+		System.out.println("\n\n");
+		System.out.println("Author =  " + author);
+		System.out.println("title  =  " + Title);
+		System.out.println("price  =  " + Price);
+		System.out.println("copies =  " + Copies);
+	}
+}
+
+class magazine extends publication 
+{
+	int issue_number;
+	Scanner input = new Scanner(System.in);
+	static int total_order;
+
+	void orderIssues() 
+	{
+		System.out.println("Quantity to order");
+		int Order_quantity = input.nextInt();
+		Copies = Copies + Order_quantity;
+		total_order = total_order + Order_quantity;
+	}
+
+	void getmagazinedata() 
+	{
+		System.out.println("title=");
+		Title = input.nextLine();
+		System.out.println("issue number=");
+		issue_number = input.nextInt();
+		System.out.println("price=");
+		Price = input.nextDouble();
+		System.out.println("copies=");
+		Copies = input.nextInt();
+	}
+
+	void displaymagazinedata() 
+	{
+		System.out.println("\n\n");
+		System.out.println("title         = " + Title);
+		System.out.println("issue number  = " + issue_number);
+		System.out.println("price         = " + Price);
+		System.out.println("copies        = " + Copies);
+		System.out.println("\n\n");
+	}
+}
+
+public class Assignment_2
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		book arr[] = new book[10];
+		magazine arr2[] = new magazine[10];
+		int flag = 0, choice = 0;
+		do 
+		{
+			System.out.println("Enter 1 to go Book Section ");
+			System.out.println("Enter 2 to go Magazine Section");
+			System.out.println("Enter 3 to Exit");
+			choice=input.nextInt();
+			switch (choice) 
+			{
+			case 1:
+				System.out.println("How many books");
+				int no_of_books = input.nextInt();
+
+				for (int i = 0; i < no_of_books; i++) 
+				{
+					arr[i] = new book();
+					arr[i].getbookdata();
+					arr[i].displaybookdata();
+				}
+				int ans1=0;
+				do 
+				{
+					System.out.println("\n\n");
+					System.out.println("Enter the choice \n1)Sale Book \n2)Give order for book \n3)Get total Sale \n4)Get Total Order\n5)TO Exit");
+					int b_choice = input.nextInt();
+					switch (b_choice) 
+					
+					{
+					case 1 :
+					{
+						String Sale_name = "OOP";
+						int flagb1 = 0;
+						for (int i = 0; i < no_of_books; i++) 
+						{
+							if (Sale_name.compareTo(arr[i].Title) == 0) 
+							{
+								System.out.println("found");
+								arr[i].saleCopy();
+								flagb1 = 1;
+								break;
+							}
+							else
+							{
+								System.out.println("Not Found");
+							}
+						}
+						if (flagb1 == 0)
+						{
+							System.out.println("not found");
+						}
+						break;
+					}
+					
+					case 2 : 
+					{
+						int flagb2 = 0;
+						String Order_name = "OOP";
+						for (int i = 0; i < no_of_books; i++) 
+						{
+							if (Order_name.compareTo(arr[i].Title) == 0) 
+							{
+								System.out.println("book found");
+								arr[i].orderCopies();
+								flagb2 = 1;
+								break;
+							}
+							else
+							{
+								System.out.println("Not Found");
+							}
+							
+						}
+						break;
+					}
+					case 3 : 
+						System.out.println("Total Sale is" + book.total_sale);
+						break;
+					case 4 :
+						System.out.println("Total Order is" + book.total_order);
+						break;
+					case 5:
+						System.out.println("Enter 1 To Confirm");
+						ans1 = input.nextInt();
+						if (ans1==1)
+						{
+							ans1=999;
+						}
+						break;
+					default:
+						System.out.println("Enter Valid Input");
+						break;
+					}
+					
+				} while (ans1 != 999);
+				break;
+			case 2:
+
+				System.out.println("How many magazines");
+				int no_of_mags = input.nextInt();
+
+				for (int i = 0; i < no_of_mags; i++) {
+					arr2[i] = new magazine();
+					arr2[i].getmagazinedata();
+					arr2[i].displaymagazinedata();
+				}
+				int ans2=0;
+				do 
+				{
+					System.out.println("\n\n");
+					System.out.println("Enter the choice \n1)Sale magazine \n2)Give order for magazine \n3)Get total Sale \n4)Get Total Order \n5)To Exit");
+					int m_choice = input.nextInt();
+					switch (m_choice) {
+					case 1 : 
+					{
+						String Sale_name = "OOP";
+						int Flag1 = 0;
+						for (int i = 0; i < no_of_mags; i++) 
+						{
+							if (Sale_name.compareTo(arr2[i].Title) == 0) {
+								System.out.println("found");
+								arr2[i].saleCopy();
+								Flag1 = 1;
+								break;
+							}
+						}
+						if (Flag1 == 0)
+						{
+							System.out.println("not found");
+						}
+						break;
+					}
+					case 2 : {
+						int Flag2 = 0;
+						String Order_name = "OOP";
+						for (int i = 0; i < no_of_mags; i++) 
+						{
+							if (Order_name.compareTo(arr2[i].Title) == 0) 
+							{
+								System.out.println("Magazine found");
+								arr2[i].orderIssues();
+								Flag2 = 1;
+								break;
+							}
+						}
+						break;
+					}
+					case 3 :
+						System.out.println("Total Sale is" + magazine.total_sale);
+						break;
+					case 4 : 
+						System.out.println("Total Order is" + magazine.total_order);
+						break;
+					case 5:
+						System.out.println("Enter 1 to Confirm");
+						ans2 = input.nextInt();
+						if (ans2==1)
+						{
+							ans2=198;
+						}
+						break;
+					default:
+						System.out.println("Enter Valid Input");
+						break;
+					}
+				
+				} while (ans2 != 999);
+
+				break;
+			case 3:
+				System.out.println("Enter 1 to Confirm");
+				int temp=input.nextInt();
+				if(temp==1)
+				{
+					flag=198;
+				}
+			break;
+			default:
+				System.out.println("Enter Valid Input");
+				break;
+			}
+
+		
+		} while (flag != 198);
+	}
+}
+/*
+________________________________________________________________________________________________________________
+Output: 
+
+Enter 1 to go Book Section 
+Enter 2 to go Magazine Section
+Enter 3 to Exit
+1
+How many books
+1
+Author = 
+Shri
+title = 
+OOP
+price = 
+200
+copies = 
+100
+
+
+
+Author =  Shri
+title  =  OOP
+price  =  200.0
+copies =  100
+
+
+
+Enter the choice 
+1)Sale Book 
+2)Give order for book 
+3)Get total Sale 
+4)Get Total Order
+5)TO Exit
+1
+found
+How many copies do you want
+50
+Final Bill amount: 10000.0
+
+
+
+Enter the choice 
+1)Sale Book 
+2)Give order for book 
+3)Get total Sale 
+4)Get Total Order
+5)TO Exit
+2
+book found
+Quantity to order
+200
+
+
+
+Enter the choice 
+1)Sale Book 
+2)Give order for book 
+3)Get total Sale 
+4)Get Total Order
+5)TO Exit
+1
+found
+How many copies do you want
+250
+Final Bill amount: 50000.0
+
+
+
+Enter the choice 
+1)Sale Book 
+2)Give order for book 
+3)Get total Sale 
+4)Get Total Order
+5)TO Exit
+4
+Total Order is200
+
+
+
+Enter the choice 
+1)Sale Book 
+2)Give order for book 
+3)Get total Sale 
+4)Get Total Order
+5)TO Exit
+3
+Total Sale is300
+
+
+
+Enter the choice 
+1)Sale Book 
+2)Give order for book 
+3)Get total Sale 
+4)Get Total Order
+5)TO Exit
+5
+Enter 1 To Confirm
+1
+Enter 1 to go Book Section 
+Enter 2 to go Magazine Section
+Enter 3 to Exit
+2
+How many magazines
+1
+title=
+OOP
+issue number=
+100
+price=
+2000
+copies=
+300
+
+
+
+title         = OOP
+issue number  = 100
+price         = 2000.0
+copies        = 300
+
+
+
+
+
+
+Enter the choice 
+1)Sale magazine 
+2)Give order for magazine 
+3)Get total Sale 
+4)Get Total Order 
+5)To Exit
+1
+found
+How many copies do you want
+200
+Final Bill amount: 400000.0
+
+
+
+Enter the choice 
+1)Sale magazine 
+2)Give order for magazine 
+3)Get total Sale 
+4)Get Total Order 
+5)To Exit
+2
+Magazine found
+Quantity to order
+300
+
+
+
+Enter the choice 
+1)Sale magazine 
+2)Give order for magazine 
+3)Get total Sale 
+4)Get Total Order 
+5)To Exit
+1
+found
+How many copies do you want
+500
+Sufficient Quantity not available
+
+
+
+Enter the choice 
+1)Sale magazine 
+2)Give order for magazine 
+3)Get total Sale 
+4)Get Total Order 
+5)To Exit
+1
+found
+How many copies do you want
+400
+Final Bill amount: 800000.0
+
+
+
+Enter the choice 
+1)Sale magazine 
+2)Give order for magazine 
+3)Get total Sale 
+4)Get Total Order 
+5)To Exit
+3
+Total Sale is600
+
+
+
+Enter the choice 
+1)Sale magazine 
+2)Give order for magazine 
+3)Get total Sale 
+4)Get Total Order 
+5)To Exit
+4
+Total Order is300
+
+
+
+Enter the choice 
+1)Sale magazine 
+2)Give order for magazine 
+3)Get total Sale 
+4)Get Total Order 
+5)To Exit
+5
+Enter 1 to Confirm
+1
+Enter 1 to go Book Section 
+Enter 2 to go Magazine Section
+Enter 3 to Exit
+3
+Enter 1 to Confirm
+1
+
+BUILD SUCCESSFUL (total time: 58 seconds)
+________________________________________________________________________________________________________________
+*/

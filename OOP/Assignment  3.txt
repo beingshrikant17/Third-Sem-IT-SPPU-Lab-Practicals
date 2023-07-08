@@ -1,0 +1,92 @@
+Name: Shrikant Sanjeev Pawar
+Roll No: 52
+SE IT
+Assignment 3: Employee Salary Calculation
+_________________________________________________________________________________________________________________________
+Code :
+
+package shrikant;
+class Employee
+{
+   String Name;
+   int Id;
+   String Email;
+   int Gross_Salary,Net_Salary,Bpay,PF,DA,HRA,Club_Fund;
+   void calculate_Salary()
+   {
+       DA=Bpay*97/100;
+       HRA=Bpay*12/100;
+       PF=-Bpay*10/100;
+       Club_Fund=(int)(Bpay*0.1/100);
+       Gross_Salary=Bpay+DA+HRA+PF+Club_Fund;
+       Net_Salary=Bpay+DA+HRA-PF-Club_Fund;
+       System.out.println("Gross Salary is :"+Gross_Salary);
+       System.out.println("Net Salary is :"+Net_Salary);
+   }
+}
+class Programmer extends Employee
+{
+    void SetBasicpay()
+    {
+        Bpay=10000;
+    }
+}
+class Team_Leader extends Employee
+{
+    void SetBasicpay()
+    {
+        Bpay=20000;
+    }
+}
+class Assistant_Project_Manager extends Employee
+{
+    void SetBasicpay()
+    {
+        Bpay=15000;
+    }
+}
+class Project_Manager extends Employee
+{
+    void SetBasicpay()
+    {
+        Bpay=50000;
+    }
+}
+public class Assignment_3 
+{
+    public static void main(String[] args)
+    {
+        Programmer Shri=new Programmer();
+        Shri.SetBasicpay();
+        Shri.calculate_Salary();
+        Team_Leader Ajay=new Team_Leader();
+        Ajay.SetBasicpay();
+        Ajay.calculate_Salary();
+        Assistant_Project_Manager Abhi=new Assistant_Project_Manager();
+        Abhi.SetBasicpay();
+        Abhi.calculate_Salary();
+        Project_Manager Sahil=new Project_Manager();
+        Sahil.SetBasicpay();
+        Sahil.calculate_Salary();
+        
+    }
+}
+
+
+
+____________________________________________________________________________________________________________________
+Output: 
+
+run:
+Gross Salary is :19910
+Net Salary is :21890
+Gross Salary is :39820
+Net Salary is :43780
+Gross Salary is :29865
+Net Salary is :32835
+Gross Salary is :99550
+Net Salary is :109450
+BUILD SUCCESSFUL (total time: 0 seconds)
+
+
+_________________________________________________________________________________________________________________________

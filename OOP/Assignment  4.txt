@@ -1,0 +1,68 @@
+Name: Shrikant Sanjeev Pawar
+Roll No: 52
+SE IT
+Assignment 4: Dynamic Binding
+_________________________________________________________________________________________________________________________
+Code :
+
+package shrikant;
+import java.util.Scanner;
+abstract class Figure
+{
+    double a,b;
+    Scanner SC=new Scanner(System.in);
+    void getdata()
+    {
+        System.out.println("Enter the value of a and b");
+        a=SC.nextDouble();
+        b=SC.nextDouble();
+     }
+     abstract void Calculate_Area();
+}
+
+class triangle extends Figure
+{
+    void Calculate_Area() 
+    {
+        double area;
+        area=0.5*a*b;
+        System.out.println("Area of triangle is:"+area);
+    }
+}
+
+class rectangle extends Figure
+{
+    void Calculate_Area() 
+    {
+        double area;
+        area=a*b;
+        System.out.println("Area of rectangle is:"+area);
+    }
+}
+
+public class Assignment_4 
+{
+    public static void main(String[] args) 
+    {
+    triangle A=new triangle();
+    A.getdata();
+    A.Calculate_Area();
+    rectangle B=new rectangle();
+    B.getdata();
+    B.Calculate_Area();
+    }
+}
+
+____________________________________________________________________________________________________________________
+Output: 
+
+Enter the value of a and b
+10
+20
+Area of triangle is:100.0
+Enter the value of a and b
+30
+40
+Area of rectangle is:1200.0
+BUILD SUCCESSFUL (total time: 12 seconds)
+_________________________________________________________________________________________________________________________

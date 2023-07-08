@@ -1,0 +1,134 @@
+Name: Shrikant Sanjeev Pawar
+Roll No: 52
+SE IT
+Assignment 1: Operations On complex Numbers
+_________________________________________________________________________________________________________________________
+Code :
+
+
+package shrikant;
+class complex 
+{
+
+    private double real, img;
+
+   complex(double r, double k)
+   {
+       real =r;
+       img=k;
+   }
+
+    void add(complex c1, complex c2) 
+    {
+
+        real = c1.real + c2.real;
+
+        img = c1.img + c2.img;
+
+    }
+
+    void sub(complex c1, complex c2) 
+    {
+
+        real = c1.real - c2.real;
+
+        img = c1.img - c2.img;
+
+    }
+
+    void mul(complex c1, complex c2) 
+    {
+
+        real = (c1.real * c2.real - c1.img * c2.img);
+
+        img = (c1.real * c2.img + c1.img * c2.real);
+
+    }
+
+    void div(complex c1, complex c2) 
+    {
+
+        real = (c1.real * c2.real + c1.img * c2.img) / (c2.real * c2.real - c2.img * c2.img);
+
+        img = (c1.img * c2.real - c1.real * c2.img) / (c2.real * c2.real - c2.img * c2.img);
+
+    }
+
+    void disp() 
+    {
+
+        System.out.println(real + "+i" + img);
+
+    }
+
+}
+
+public class Assignment_1
+{
+
+    public static void main(String args[]) 
+    {
+
+        complex c1 = new complex(8, 9);
+
+        complex c2 = new complex(2, 3);
+
+        complex c3 = new complex(0, 0);
+
+        complex c4 = new complex(0, 0);
+
+        complex c5 = new complex(0, 0);
+
+        complex c6 = new complex(0, 0);
+
+        System.out.println("1st complex number: ");
+
+        c1.disp();
+
+        System.out.println("2nd complex number: ");
+
+        c2.disp();
+
+        System.out.println("addition of complex number: ");
+
+        c3.add(c1, c2);
+        c3.disp();
+
+        System.out.println("subtraction of complex number: ");
+
+        c4.sub(c1, c2);
+        c4.disp();
+
+        System.out.println("multiplication of complex number: ");
+
+        c5.mul(c1, c2);
+        c5.disp();
+
+        System.out.println("division of complex number: ");
+
+        c6.div(c1, c2);
+        c6.disp();
+       
+    }
+
+}
+
+____________________________________________________________________________________________________________________
+Output: 
+
+
+run:
+1st complex number: 
+8.0+i9.0
+2nd complex number: 
+2.0+i3.0
+addition of complex number: 
+10.0+i12.0
+subtraction of complex number: 
+6.0+i6.0
+multiplication of complex number: 
+-11.0+i42.0
+division of complex number: 
+-8.6+i1.2
+BUILD SUCCESSFUL (total time: 0 seconds)
+_________________________________________________________________________________________________________________________

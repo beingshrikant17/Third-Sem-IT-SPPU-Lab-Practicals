@@ -1,0 +1,469 @@
+-----------------------------------------------------------------------------------------------
+Name-Vinit Nitin Hingmire
+Subject - DSA
+Assignment - 2
+-----------------------------------------------------------------------------------------------
+
+#include<iostream>
+#include<ctype.h>
+#include<string.h>
+#include<math.h>
+
+using namespace std;
+struct node
+{
+ char data;
+ struct node *next;	
+};
+
+class stack                  //creating class stack to write all the stack functions
+{
+	node *top;
+public :
+    stack()
+	{
+		top=NULL;
+	}
+ char Top()                      //to initialize the stack
+   {
+   	return (top->data);
+	}	
+ void push(char x)               //to push next element  
+    {
+    	node *temp;
+    	temp=new node;
+	 temp->data=x;
+	 temp->next=top;
+	 top=temp;
+	}	
+char pop()                      //to pop the last element
+    {
+     char value;
+     value=top->data;
+     top=top->next;
+	 return(value);
+	}		
+int isempty()                  //to check whether stack is empty or not
+    {
+    	if(top==NULL)
+    	return 1;
+    	else
+    	return 0;
+	}
+};
+------------------------------------------------------------------------
+/*
+function name- priority
+input- char op
+output- NILl
+*/
+------------------------------------------------------------------------
+int priority(char op)            //to give priorities to the signs
+{
+if(op=='(' || op==')')
+	return 0;
+else if(op=='+' || op=='-')
+	return 1;
+else if(op=='*' || op=='/' || op=='%')
+	return 2;
+else if(op=='^')
+	return 3;
+else 
+	return 4;
+}
+------------------------------------------------------------------------
+/*
+function name- operation
+input- char op,int A, int B
+output- NILl
+*/
+------------------------------------------------------------------------
+int operation(char op,int A,int B)              //giving operations to signs
+{
+if(op=='*')
+	return A*B;
+else if(op=='/')
+	return A/B;
+else if(op=='^')
+	return pow(A,B);
+else if(op=='+')
+	return A+B;
+else if(op=='-')
+	return A-B;
+else
+	return -1;
+}
+------------------------------------------------------------------------
+/*
+function name- infixtopostfix
+input- char infix[50]
+output- postfix expression
+*/
+------------------------------------------------------------------------
+void infixtopostfix(char infix[50])     //function to convert infix to postfix
+{
+ char token, operand, post[50];
+ int i, j=0;
+ stack S;
+for(i=0; infix[i]!='\0'; i++)
+{
+   token=infix[i];
+   if(isalnum(token))
+   post[j++]=token;
+   else if(token=='(')
+   S.push(token);
+   else if(token==')')
+   while((operand=S.pop())!='(')
+   	post[j++]=operand;
+	
+
+    else
+    {
+    	while(!S.isempty() && priority(S.Top())>=priority(token))
+    	post[j++]=S.pop();
+    	S.push(token);
+	}	
+ }
+while(!S.isempty())
+post[j++]=S.pop();
+post[j]='\0';   	
+cout<<post;    
+}
+------------------------------------------------------------------------
+/*
+function name- infixtoprefix
+input- char infix[50]
+output- prefix expression
+*/
+------------------------------------------------------------------------
+void infixtoprefix(char infix[50])      //function to convert infix to postfix
+{
+ 	char token, operand, pre[50];
+	 int i, j=0;
+ 	stack S;
+	for(i=strlen(infix)-1; i>=0; i--)
+	{
+  	 token=infix[i];
+  	 if(isalnum(token))
+   	pre[j++]=token;
+   	else if(token==')')
+   	S.push(token);
+   	else if(token=='(')
+   	while((operand=S.pop())!=')')
+   		pre[j++]=operand;
+    	else
+    	{
+    		while(!S.isempty() && priority(S.Top())>priority(token))
+    		pre[j++]=S.pop();
+    		S.push(token);
+	}	
+ }
+while(!S.isempty())
+pre[j++]=S.pop();
+
+pre[j]='\0';  
+//Displaying in reverse
+for(i=strlen(pre)-1; i>=0; i--) 	
+cout<<pre[i];    	
+}
+--------------------------------------------------------
+Function Name: Postfix Evaluation
+Input: char exp[50]
+Output: Returns the value obtained after the evaluation 
+of the given expression
+--------------------------------------------------------
+
+float postfixevaluation(char exp[50])
+{
+	int i,val;
+	char token;
+	float operand1,operand2,result;
+	stack  S;
+	
+	for(i=0;exp[i]!='\0';i++)
+	{
+		token=exp[i];
+		if(isdigit(token))
+		{
+			S.push(token-48);
+		}
+		else
+		{
+			operand2=S.pop();
+		 	operand1=S.pop();
+		 	result=operation(token,operand1,operand2);
+		 	S.push(result);
+		}
+	}	
+	return S.pop();	
+}
+
+--------------------------------------------------------
+Function Name: Prefix Evaluation
+Input: char Str[50]
+Output: Returns the value obtained after the evaluation
+of the given expression
+--------------------------------------------------------
+
+float prefixevaluation(char Str[50])
+{
+	int i,val;
+	float operand1,operand2,result;
+	stack S;
+	for(i=strlen(Str)-1;i>=0;i--)
+	{
+      	if(isdigit(Str[i]))  
+      	{
+        	S.push(Str[i]-48);
+      	}
+      	else
+      	{
+		operand1=S.pop();
+		operand2=S.pop();
+		result=operation(Str[i],operand1,operand2);
+		S.push(result);
+      	}
+	}
+	return S.pop();	
+}
+
+
+------------------------------------------------------------------------
+                            //main function
+int main()              
+{
+int choice;
+char expression[50];
+do
+{
+	cout<<"\nEnter Choice of Operation:\n1. Infix to Postfix \n2. Infix to Prefix \n3. Postfix Evaluation \n4. Prefix Evaluation \n5. Exit\n"
+	cin>>choice;
+	switch(choice)            //implementing switch case
+	{
+	case 1:	cout<<"Enter Infix Expression\n";
+		cin>>expression;
+		infixtopostfix(expression);
+		break;
+	case 2:	cout<<"Enter Infix Expression\n";
+		cin>>expression;
+		infixtoprefix(expression);
+		break;
+
+	case 3:	cout<<"Enter Postfix Expression\n";
+		cin>>expression;
+		cout<<"Answer: "<<postfixevaluation(expression);
+		break;
+	case 4:	cout<<"Enter Prefix Expression\n";
+		cin>>expression;
+		cout<<"Answer: "<<prefixevaluation(expression);
+		break;
+	case 5: 	cout<<"End of program";
+	      	break;
+		default:
+		cout<<"Wrong choice";
+		break;
+		}
+		cout<<"\n";
+}while(choice!=5);                // to terminate the program
+}
+
+--------------------------------------------------------------------------------------
+output-
+---------------------------------------------------------------------------------------
+Enter Choice of Operation:
+1. Infix to Postfix
+2. Infix to Prefix
+3. Postfix Evaluation
+4. Prefix Evaluation
+5. Exit
+1
+Enter Infix Expression
+3+5-8
+35+8-
+
+Enter Choice of Operation:
+1. Infix to Postfix
+2. Infix to Prefix
+3. Postfix Evaluation
+4. Prefix Evaluation
+5. Exit
+2
+Enter Infix Expression
+5+6-9*8
+-+56*98
+
+Enter Choice of Operation:
+1. Infix to Postfix
+2. Infix to Prefix
+3. Postfix Evaluation
+4. Prefix Evaluation
+5. Exit
+3
+Enter Postfix Expression
+35+8-
+Answer: 0
+
+Enter Choice of Operation:
+1. Infix to Postfix
+2. Infix to Prefix
+3. Postfix Evaluation
+4. Prefix Evaluation
+5. Exit
+4
+Enter Prefix Expression
+-+56*98
+Answer: -61
+
+Enter Choice of Operation:
+1. Infix to Postfix
+2. Infix to Prefix
+3. Postfix Evaluation
+4. Prefix Evaluation
+5. Exit
+5
+End of program
+
+--------------------------------
+Process exited after 132.7 seconds with return val
+ue 0
+Press any key to continue . . .
+
+
+
+
+
+#include<iostream>
+#include<ctype.h>
+#include<stdlib.h>
+#include<math.h>
+using namespace std;
+
+struct node{
+	char data;
+	struct node *next;
+};
+class stack {
+	node *top;
+	public:
+		stack()
+		{
+			top=NULL;
+		}
+		char Top()
+		{
+			return top->data;
+		}
+		void push(char x)
+		{
+			node *temp;
+			temp = new node;
+			temp->data=x;
+			temp->next=top;
+			temp=top;
+		}
+		char pop()
+		{
+			char value;
+			value =top->data;
+			top=top->next;
+			return(value);
+		}
+		int isempty()
+		{
+			if(top==NULL)
+			
+				return 1;
+			else
+				return 0;
+		}
+};
+
+
+int priority(char op)
+{
+	if(op == '(' || op == ')')
+	return 0;
+	else if(op == '+' || op == '-')
+	return 1;
+	else if (op == '*' || op == '/' || op == '%')
+	return 2;
+	else if (op == '^')
+	return 3;
+	else
+	return 4;
+}
+
+int operation(char op,int A,int B)
+{
+	if(op == '+')
+	return A+B;
+	else if(op == '-')
+	return A-B;
+	else if (op == '*')
+	return A*B;
+	else if (op == '/')
+	return A/B;
+	else if (op == '^')
+	return pow(A,B);
+	else
+	return -1 ;
+}
+
+int infixtopostfix(char infix[50])
+{
+	char token,operand,post[50];
+	int i,j=0;
+	stack s;
+	for (i=0; infix[i] != 0; i++)
+	{
+		token =infix[i];
+		if(isalnum(token))
+		{
+			post[j++]=token;
+		}
+		else if (token == '(')
+		s.push(token);
+		else if(token == ')')
+		while((operand=s.pop()) !='(')
+		post[j++]=operand;
+		
+		else{
+		while(!s.isempty() && priority(s.Top())>=priority(token))
+		post[j++]=s.pop();
+		s.push(token);}
+	}	
+	while(!s.isempty())
+		post[j++]=s.pop();
+		post[j]='\0';   	
+		cout<<post; 
+		
+	}
+	
+int main()              
+{
+int choice;
+char expression[50];
+do
+{
+	cout<<"\nEnter Choice of Operation:\n1. Infix to Postfix \n2. Infix to Prefix \n3. Postfix Evaluation \n4. Prefix Evaluation \n5. Exit\n";
+	cin>>choice;
+	switch(choice)            //implementing switch case
+	{
+	case 1:	cout<<"Enter Infix Expression\n";
+		cin>>expression;
+		infixtopostfix(expression);
+		break;
+	case 2: 	
+		cout<<"End of program";
+	    break;
+		default:
+		cout<<"Wrong choice";
+		break;
+	}
+	cout<<"\n";
+	}while (choice != 2);
+}
+
+
+
+

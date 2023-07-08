@@ -1,0 +1,107 @@
+Name: Shrikant Sanjeev Pawar
+Roll No: 52
+SE IT
+Assignment 6: Exception Handling
+_________________________________________________________________________________________________________________________
+Code :
+
+package shrikant;
+import java.util.Scanner;
+import java.util.*;
+class A
+{
+    int num1,num2,answer;
+    int a[]=new int[3];
+    Scanner SC=new Scanner(System.in);
+    void getdata()
+    {
+        System.out.println("Enter Two numbers");
+        num1=SC.nextInt();
+        num2=SC.nextInt();
+    }
+    void division()
+    {
+        answer=num1/num2;
+        System.out.println("Result s"+answer);
+    }
+
+    void Arraycheck()
+    {
+        int index;
+        a[0]=100;
+        a[1]=200;
+        a[2]=300;
+        System.out.println("Enter the index number to access data from array");
+        index=SC.nextInt();
+        System.out.println("Value at index "+index + "is "+a[index]);
+    }
+    void inputmissmatch()
+    {
+        System.out.println("Enter ANy Integer Value");
+        int a=SC.nextInt();
+    }
+}
+public class Assignment_6
+{
+
+    public static void main(String[] args)
+    {
+
+        A o=new A();
+        try
+        {
+            o.getdata();
+        }
+        catch(Exception d)
+        {
+            System.out.println("Error");
+        }
+        try
+        {
+            o.division();
+        }
+        catch(ArithmeticException E)
+        {
+            System.out.println("Error in Arithmetic Exception");
+        }
+        try
+        {
+            o.Arraycheck();
+        }
+        catch(ArrayIndexOutOfBoundsException A)
+        {
+            System.out.println("Array Index Out of Bounds Exception");
+        }
+        
+        try
+        {
+            o.inputmissmatch();
+        }
+        catch(InputMismatchException E)
+        {
+            System.out.println("Please Provide Valid Input(Integer)");
+        }
+        
+    }
+
+}
+
+
+
+____________________________________________________________________________________________________________________
+Output: 
+
+
+Enter Two numbers
+10
+0
+Error in Arithmetic Exception
+Enter the index number to access data from array
+4
+Array Index Out of Bounds Exception
+Enter ANy Integer Value
+h
+Please Provide Valid Input(Integer)
+BUILD SUCCESSFUL (total time: 16 seconds)
+
+_________________________________________________________________________________________________________________________
